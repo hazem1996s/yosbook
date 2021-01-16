@@ -1,0 +1,99 @@
+<div class="container-fluid" style="margin-top:2%; margin-bottom: 5%;" dir="rtl">
+  <div class="col-md-11 center">
+    <h2 class="text-center arabic" style="margin-bottom:5%"> - الجامعات الحكومية - </h2>
+    <div class="col-md-3 col-12">
+        <div class="row ">
+            <i style="color: green;" class="fa fa-circle ml-4 mb-4"><span class="mr-2 arabic" style="color: black;">متاح التسجيل</span></i>
+            <i style="color: #fb3; " class="fa fa-circle  ml-4 mb-4"><span class="mr-2 arabic" style="color: black;">ينتهي قريباً</span></i>
+            <i style="color: #ff3547;" class="fa fa-circle ml-4 mb-4"><span class="mr-2 arabic" style="color: black;">انتهى التسجيل</span></i>
+            <i style="color: gray;" class="fa fa-circle ml-4 mb-4"><span class="mr-2 arabic" style="color: black;">لم تفتح بعد</span></i>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 arabic">
+            <mat-form-field class="example-full-width arabic" appearance="outline" style="width: 100%;">
+                <mat-label>ابحث هنا <i class="fas fa-search prefix"></i> </mat-label>
+                <input placeholder="ابحث باسم الجامعة او بالرابط او بالمدينة..." matInput [(ngModel)]="searchText" type="search">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <form novalidate [formGroup]="searchForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+                <div class="row" dir="rtl">
+                    <div class="col-md-8 arabic">
+                        <mat-form-field class="example-full-width arabic" style="width: 100%;" appearance="outline">
+                            <mat-label>فلتر الجامعات عن طريق</mat-label>
+                            <mat-select class="arabic" formControlName="searchType">
+                                <mat-option class="arabic" value="yosAccept" (click)="cancelFilter()">تقبل يوس</mat-option>
+                                <mat-option class="arabic" value="satAccept" (click)="cancelFilter()">تقبل سات</mat-option>
+                                <mat-option class="arabic" value="schoolAccept" (click)="cancelFilter()">تقبل الثانوية</mat-option>
+                                <mat-option class="arabic" value="master" (click)="cancelFilter()">الدراسات العليا | YÜKSEK LISANA </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <button *ngIf="!searchDone" class="btn btn-success btn-block arabic" type="submit" [disabled]="searchForm.value.searchType == ''" style="margin-top: 9%;">فلتر</button>
+                        <a *ngIf="searchDone" class="btn btn-secondary btn-block arabic" (click)="getSome_Data()" style="margin-top: 9%;color: #fff;">إلغاء الفلتر</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="!spinner">
+        <div class="col-md-6 center" *ngIf="wrongSearch">
+            <p class="h3-responsive text-center arabic" style="color: red;">
+                لا يوجد نتائج مطابقة
+            </p>
+        </div>
+        <div class="row" *ngIf="!wrongSearch">
+            <div class="col-md-3 mt-4 mb-4" *ngFor="let university of universities | filter:searchText; let i = index">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8">
+                                <img src="{{university.logo}}" width="75px" height="75px" class="center">
+                            </div>
+                            <div class="col-2">
+                                <i *ngIf="calculateDiff(university.endDate) == 'Active'" style="color: green;" class="fa fa-circle fa-lg"></i>
+                                <i *ngIf="calculateDiff(university.endDate) == '5_days'" style="color: #fb3;" class="fa fa-circle fa-lg"></i>
+                                <i *ngIf="calculateDiff(university.endDate) == 'inactive'" style="color: #ff3547;" class="fa fa-circle fa-lg"></i>
+                                <i *ngIf="calculateDiff(university.endDate) == 'khara'" style="color: gray;" class="fa fa-circle fa-lg"></i>
+                            </div>
+                        </div>
+                        <div class="card-header-text">
+                            <p class="center arabic" style="margin-top: 8%; text-align: center;">{{university.name}}</p>  
+                            <p class="center arabic" style="margin-top: 1%; text-align: center;">{{university.nameTR}}</p>                                          
+                        </div>
+                    </div>
+                    <div class="card-body text-right">
+                        <div class="container-fluid">
+                            <ul style="padding: 0%">
+                                <li >
+                                    <p class="arabic">المدينة : <span>{{university.city}}</span> </p>
+                                </li>
+                                <li >
+                                    <h6 class=" arabic h6-responsive"> بدء التسجيل : {{university.startDate | date: 'dd/MM/yyyy'}} </h6>
+                                </li>
+                                <li >
+                                    <h6 class=" arabic h6-responsive"> انتهاء التسجيل : {{university.endDate | date: 'dd/MM/yyyy'}}</h6>
+                                </li>
+                            </ul>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <a [routerLink]="['/public-university', university.id]" class="btn btn-primary btn-block arabic">صفحة الجامعة</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 center mt-4" *ngIf="loadMore && !searchDone && !wrongSearch">
+            <button class="btn btn-link btn-block arabic" (click)="getAllData()">عرض المزيد</button>
+        </div>
+    </div>
+    <mat-spinner style="margin-top: 15px;" class="center" *ngIf="spinner"></mat-spinner>
+  </div>
+</div>

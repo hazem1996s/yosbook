@@ -1,0 +1,31 @@
+export class Public_Uni { 
+    id: string;
+    name: string;
+    nameTR: string;
+    notes: string;
+    description: string;
+    link: string;
+    city: string;
+    logo: string;
+    location: string;
+    rankingTR: string;
+    rankingIN: string;
+    costsLink: string;
+    resultLink: string;
+    registerLink: string;
+    paperRequired: string;
+    registerWay: string;
+    seatsAvai: string;
+    seatsAvaiEn: string;
+    costs: string;
+    certificates: string;
+    result: string;
+    yosAccept: boolean;
+    satAccept: boolean;
+    schoolAccept: boolean;
+    master: boolean;
+    registerStart: string;
+    registerEnd: string;
+    startDate: Date;
+    endDate: string;
+}

@@ -1,0 +1,54 @@
+.center {
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+.header-h1 {
+    text-align: center;
+    margin-top: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    letter-spacing: 10px;
+}
+
+.header-p {
+    text-align: center;
+    margin-top: 2%;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 900 !important;
+    font-size: 60px;
+    letter-spacing: 2px;
+}
+.image {
+  z-index: -55555;
+  position: absolute;
+  top: 14%;
+  left: 16%;
+  width: 70%;
+  opacity: 0.25;
+}
+@media screen and (max-width: 600px){
+  .header-p {
+    font-size: 45px;
+  }
+  .image {
+    top: 51%;
+    left: 0%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .header-h1 {
+    letter-spacing: 2px;
+  }
+  .image {
+    top: 27%;
+    left: 0%;
+    width: 100%;
+  }
+}
+
+a {
+    color: #212529;
+}

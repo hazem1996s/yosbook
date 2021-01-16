@@ -1,0 +1,182 @@
+<div *ngIf="!spinner && !start">
+    <div class="container">
+        <div class="col-md-6 center">
+            <div class="card text-right arabic mt-4 mb-4" dir="rtl">
+                <div class="card-header text-center">
+                    <p class="h2-responsive">
+                        - {{exam.name}} - 
+                    </p>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li style="line-height: 2rem">
+                            <p class="card-text arabic">
+                                تفاصيل الامتحان : <span [innerHTML]="exam.description"></span>
+                            </p>
+                        </li>
+                        <li style="line-height: 2rem">
+                            <p class="card-text arabic">
+                                مدة الامتحان : <span style="font-weight: 900;">{{exam.time / 60 | number:'1.1-1'}}</span> دقيقة
+                            </p>
+                        </li>
+                        <li style="line-height: 2rem">
+                            <p class="card-text arabic">
+                                عدد الاسئلة : <span style="font-weight: 900;">{{exam.questions.length}}</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary btn-block" (click)="startExam()">
+                                بدء الامتحان
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button (click)="backClicked()" class="btn btn-danger btn-block">
+                                الرجوع
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container arabic" *ngIf="start">
+    <div id="quiz" dir="rtl">
+        <div *ngIf="mode=='quiz' && exam">
+            <!-- pc disign -->
+            <div class="show" *ngFor="let question of filteredQuestions;">
+                <div class="row">
+                    <div class="col-md-6 col-6">
+                        <h5 class="text-right"><span *ngIf="config.duration" class="badge badge-dark" style="padding: .84rem 2.14rem; margin-top: 11px;float: right;">Time: {{ellapsedTime}} / {{duration}}</span></h5>
+                    </div>
+                    <div class="col-md-6 col-6">
+                        <h5 class="text-left"><span class="badge badge-dark" style="padding: .84rem 2.14rem; margin-top: 11px; float: left;">السؤال {{pager.index + 1}} من اصل {{pager.count}}</span></h5>
+                    </div>
+                </div>
+                <div class="col-md-12" [@visibility]="visibility" [@expand] style="margin-top: 20px;">
+                    <div class="card card-body card-question">
+                        <h3 class="font-weight-normal text-right">{{pager.index + 1}})
+                        </h3>
+                        <img width="100%" height="250px" src="{{question.image}}">
+                    </div>
+                </div>
+                <div class="col-4 center text-center" dir="rtl">
+                    <button class="btn btn-link arabic" style="color: #007bff !important;font-size: 15px;" (click)="goTo(pager.index + 1);"><i class="fas fa-angle-double-right"></i>التالي</button>
+                    <button *ngIf="pager.index != 0" class="btn btn-link arabic" style="font-size: 15px;" (click)="goTo(pager.index - 1);">السابق<i class="fas fa-angle-double-left"></i> </button>
+                    <button *ngIf="pager.index == 0" class="btn btn-link arabic" style="font-size: 15px;" disabled>السابق<i class="fas fa-angle-double-left"></i> </button>
+                </div>
+                <!-- optionWritten  -->
+                <div class="row text-left options" [@visibility]="visibility" [@expand] *ngIf="question.optionType == 'optionWritten'">
+                    <div class="col-md-6 col-12" style="margin-top: 10px;" *ngFor="let option of question.options">
+                        <label class="font-weight-normal list-group-item list-group-item-action text-right" [attr.for]="option.id">
+                            {{option.name}} <input style="float: left;" id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" />
+                        </label>
+                    </div>
+                </div>
+                <!-- optionImage  -->
+                <div class="row text-left options optionImage" [@visibility]="visibility" [@expand] *ngIf="question.optionType == 'optionImage'">
+                    <div class="col-md-6 col-12 " style="margin-top: 10px;" *ngFor="let option of question.options; let i = index">
+                        <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" />
+                        <label class="font-weight-normal list-group-item list-group-item-action text-right" [attr.for]="option.id">
+                            <img class="bodyshadow" src="{{option.name}}">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- mobile disign -->
+            <div class="unshow" *ngFor="let question of filteredQuestions;">
+                <div class="row">
+                    <div class="col-md-4 col-6">
+                        <h5 class="text-right"><span *ngIf="config.duration" class="badge badge-dark" style="padding: .84rem 0rem; margin-top: 11px;width: 100%">Time: {{ellapsedTime}} / {{duration}}</span></h5>
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <h5 class="text-left"><span class="badge badge-dark" style="padding: .84rem 0rem; margin-top: 11px; width: 100%;">السؤال {{pager.index + 1}} من اصل {{pager.count}}</span></h5>
+                    </div>
+                </div>
+               
+                <div class="col-md-12" [@visibility]="visibility" [@expand] style="margin-top: 20px;">
+                    <div class="card card-body card-question">
+                        <h3 class="font-weight-normal text-right">{{pager.index + 1}})
+                        </h3>
+                        <img width="100%" src="{{question.image}}">
+                    </div>
+                </div>
+                <div class="col-12 text-center" dir="rtl">
+                    <button class="btn btn-link arabic" style="color: #007bff !important;font-size: 15px;" (click)="goTo(pager.index + 1);"><i class="fas fa-angle-double-right"></i>التالي</button>
+                    <button *ngIf="pager.index != 0" class="btn btn-link arabic" style="font-size: 15px;" (click)="goTo(pager.index - 1);">السابق<i class="fas fa-angle-double-left"></i> </button>
+                    <button *ngIf="pager.index == 0" class="btn btn-link arabic" style="font-size: 15px;" disabled>السابق<i class="fas fa-angle-double-left"></i> </button>
+                </div>
+                <!-- optionWritten  -->
+                <div class="row text-left options" [@visibility]="visibility" [@expand] *ngIf="question.optionType == 'optionWritten'">
+                    <div class="col-md-6 col-12" style="margin-top: 10px;" *ngFor="let option of question.options">
+                        <label class="font-weight-normal list-group-item list-group-item-action text-right" [attr.for]="option.id">
+                            {{option.name}} <input style="float: left;" id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" />
+                        </label>
+                    </div>
+                </div>
+                <!-- optionImage  -->
+                <div class="row text-left options optionImage" [@visibility]="visibility" [@expand] *ngIf="question.optionType == 'optionImage'">
+                    <div class="col-md-6 col-12 " style="margin-top: 10px;" *ngFor="let option of question.options; let i = index">
+                        <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" />
+                        <label class="font-weight-normal list-group-item list-group-item-action text-right" [attr.for]="option.id">
+                            <img class="bodyshadow" src="{{option.name}}">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br>
+            </div>
+        </div>
+        <div class="result" *ngIf="mode=='result'" dir="rtl">
+            <div class="row" [@visibility]="visibility" [@expand] style="background-color: #eee;">
+                <div class="container"> 
+                    <div class="row">
+                        <div class="col-8">
+                            <h2 class="text-right" style="margin-top: 15px;">نتيجة الامتحان هي</h2>
+                        </div>
+                        <div class="col-4">
+                            <span style="font-size:40px">%{{getResult()}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row alert-success" [@visibility]="visibility" [@expand]>
+                <div class="col-9">
+                    <h2 class="text-right" style="margin-top: 5px;">الأجوبة الصحيحة:</h2>
+                </div>
+                <div class="col-3" style="margin-top: 5px;">
+                    <span style="font-size: 25px;">{{trueQuestions}}</span>
+                </div>
+            </div>
+            <div class="row alert-danger" [@visibility]="visibility" [@expand]>
+                <div class="col-9">
+                    <h2 class="text-right" style="margin-top: 5px;">الأجوبة الخاطئة:</h2>
+                </div>
+                <div class="col-3" style="margin-top: 5px;">
+                    <span style="font-size: 25px;">{{falseQuestions}}</span>
+                </div>
+            </div>
+            <p class="alert alert-info text-center">اضغط على <a routerLink="/">الصفحة الرئيسية</a> للبدء بامتحان آخر</p>
+        </div>
+        <div class="mb-4" *ngIf="mode!='result'">
+            <div class="col-xl-2 col-lg-3 col-md-4 center">
+                <button style="border-radius: 30px;" mdbBtn type="button" color="dark" outline="true" mdbWavesEffect class="btn-block" (click)="onSubmit();">انهاء الامتحان</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- <div style="margin-top:80px" *ngIf="errMess">
+    <h3 class="arabic text-center">لقد حدث خطأ في الخادم اذهب الى <a routerLink="/">الصفحة الرئيسية</a></h3>
+</div> -->
+
+<div *ngIf="spinner" style="height: 800px;">
+    <mat-spinner style="margin-top: 15px;" class="center" ></mat-spinner>
+</div>

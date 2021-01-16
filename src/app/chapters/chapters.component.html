@@ -1,0 +1,32 @@
+<div class="container-fluid" style="margin-top: 2%">
+    <h2 class="text-center arabic"> الأبحاث الموجودة في قسم {{quizTypeAR}}</h2>
+    <div class="col-md-10 center" style="margin-bottom: 1.5; margin-top: 5%;" dir="rtl">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <h3 class="card-header text-center font-weight-bold py-4 arabic">الأبحاث الموجودة</h3>
+                <div class="card-body arabic">
+                    <div id="table" class="table-editable">
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <tr>
+                                <th class="text-center">رقم التسلسل</th>
+                                <th class="text-center">اسم البحث</th>
+                            </tr>
+                            <tr *ngFor="let chapter of sortData; let i = index">
+                                <td style="text-align: center;">
+                                    <p>
+                                        {{i+1}}
+                                    </p>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a [routerLink]="['/', quizLink, chapter.id]" class="btn btn-link">
+                                        {{chapter.chapterName}}
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

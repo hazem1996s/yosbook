@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="row col-md-4 col-12 center animated bounceInDown" style="margin-top: 5%;border-radius: 10px; margin-bottom: 10%;" >
+      <p class="card-header text-center arabic">
+        إنشاء حساب جديد
+      </p>
+      <div class="card-body"> 
+        <form class="text-center card card-body bodyshadow" style="border-radius: 20px;" [formGroup]="signUpForm" #fform="ngForm">
+          <h5 *ngIf="errMess" style="color:rgb(255, 255, 255)">{{errMess}}</h5>
+          <div *ngIf="formErrors.email">
+            <p  style="color:rgb(255, 255, 255);margin-bottom: 1px;text-align: left;">{{ formErrors.email }}</p>
+          </div>
+          <input type="email" formControlName="email" id="defaultLoginFormEmail" class="form-control mb-3 " #userName placeholder="الايـمـيـل">
+          <input type="password" formControlName="password" id="defaultLoginFormPassword" class="form-control mb-3 " #userPassword placeholder="كـلـمـة الـمـرور">
+          <input type="password" formControlName="confirmPass"  class="form-control mb-3 " #userPassword placeholder="إعادة كـلـمـة الـمـرور">
+          <button [hidden]="loading" class="btn btn-success btn-block my-3 " type="submit" (click)="SignUp(userName.value, userPassword.value)" [disabled]="signUpForm.invalid"> إنشاء حساب </button>
+          <button *ngIf="loading" class="btn btn-success btn-block my-3 " type="submit" > جاري إنشاء حساب <i style="margin-left:3px" class="fa fa-spinner fa-spin fa-lg"></i></button>
+        </form>
+      </div>
+      
+    </div>
+  </div>

@@ -1,0 +1,27 @@
+<div class=" smolfooter" style="margin-top: 5%; padding-bottom: 5%;">
+  <div class="col-md-4 center "> 
+    <p class="arabic card-header animated bounceInLeft" style="margin-top: 2%; font-size: 28px; text-align: center;border-radius:20px ;">
+      للدخول الى قسم الإمتحانات يجب تسجيل الدخول
+      </p>
+      <div class="card-body">
+        <form class="text-center border border-light p-5 animated bounceInRight bodyshadow" style="border-radius: 20px;" [formGroup]="signInForm" #fform="ngForm">
+          <h5 style="margin-bottom: 3%;">من فضلك ادخل معلومات حسابك</h5>
+          <h5 class="arabic" *ngIf="errMess" style="color:red">{{errMess}}</h5>
+          <div *ngIf="formErrors.email">
+            <p style="color:red;margin-bottom: 1px;text-align: left;">{{ formErrors.email}}</p>
+          </div>
+          <input type="email" formControlName="email" id="defaultLoginFormEmail" class="form-control mb-4" #userName placeholder="الايـمـيـل">
+          <input type="password" formControlName="password" id="defaultLoginFormPassword" class="form-control mb-4" #userPassword placeholder="كـلـمـة الـمـرور">
+          <button [hidden]="loading" class="btn btn-primary btn-block my-4" type="submit" (click)="SignIn(userName.value, userPassword.value)" [disabled]="signInForm.invalid">تسجيل دخول</button>
+          <button *ngIf="loading" class="btn btn-primary btn-block my-4" type="submit" >جاري تسجيل الدخول<i style="margin-left:3px" class="fa fa-spinner fa-spin fa-lg"></i></button>
+          <div class="forgotPassword">
+            <a routerLink="/forget-password" style="color:rgb(0, 0, 0);">هل نسيت كلمة المرور ؟</a>
+          </div>
+          <div class="forgotPassword">
+            <a routerLink="/sign-up" style="color:rgb(0, 0, 0);">  !! إنشاء حساب جديد</a>      </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+

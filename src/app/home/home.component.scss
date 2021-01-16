@@ -1,0 +1,406 @@
+.bold-line{
+    margin-top: 27px;
+    border: 0;
+    border-top: 1.5px solid rgba(0, 0, 0, 0.829);
+    width: 75%;
+}
+.carousel-caption{
+    bottom: 40%;
+    text-align: center;
+
+}
+a:hover {
+    color: #0056b3;
+    text-decoration: wavy !important;
+}
+a {
+    cursor: alias;
+    text-decoration: none;
+    color: #007bff;
+    transition: all 0.2s ease-in-out;
+}
+@media (max-width : 700px) {
+    .unshow {
+        display: none;
+    }
+    .phoncenter {
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+    .nopadding {
+       padding: 10px !important;
+    
+    }
+    .minfont {
+        font-size: 12px;
+    }
+    .pcheight {
+        height: 100% !important;
+    }
+    .carousel-caption{
+        bottom: 10% !important;
+        text-align: center;
+      
+    }
+    .minCenter {
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+
+    }
+}
+.card-title {
+    font-weight: 600 !important;
+}
+.some {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    text-align: center;
+}
+.cards {
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    background: white;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    transition: 0.4s ease-out;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cards:hover:before {
+    opacity: 0;
+}
+.cards:hover .info {
+    opacity: 0;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+}
+.cards:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    transition: 0.5s;
+    opacity: 1;
+}
+.cards img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+}
+.cards .info {
+    position: relative;
+    z-index: 3;
+    color: white;
+    opacity: 1;
+    -webkit-transform: translateY(30px);
+    transform: translateY(30px);
+    transition: 0.5s;
+    top: -14%;
+}
+.cards .info h1 {
+    margin: 0px;
+}
+.cards .info p {
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin-top: 8px;
+}
+.hr2 {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.ncards {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+    transition: 0.25s;
+    margin-bottom: 8%;
+    
+}
+.ncards:hover {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+    transition: 0.25s;
+    margin-bottom: 8%;
+}
+.hh:hover {
+    color: #f19d2e !important;
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1.3); 
+    transition: 0.2s ease-out;
+
+}
+.hh {
+    color: #ffffff !important;
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Safari 3-8 */
+    transform: scale(1); 
+    transition: 0.2s ease-out;
+}
+
+h3 {
+    color: #ffffff;
+}
+.bodyshadow {
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+
+
+.card-header-text {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+
+
+.vc_row.vc_column-gap-30 .p-0.vc_column_container {
+    padding: 0;
+}
+
+.cos-row .vc_row {
+    margin: 0 -6px;
+}
+
+.cos-pad.vc_column_container .vc_column-inner {
+    padding: 0 6px;
+}
+.woocommerce ul.products li.product .onsale, 
+.woocommerce span.onsale, 
+span.onsale {
+    margin: 0;
+    position: absolute;
+    left: -40px;
+    right: unset;
+    transform: rotate(-47deg);
+    top: 6px;
+    z-index: 2;
+    background-color: #6d48e5;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.2;
+    border-radius: 0px;
+    min-height: auto;
+    padding: 8px 45px;
+}
+
+.woocommerce ul.products li.product .button.yith-wcqv-button,
+a.button.yith-wcqv-button,
+span.ui-accordion-header-icon,
+.vc_tta-panel-heading,
+.contact-page .stylista-iconbox.box p,
+span.says,
+.widget_search .screen-reader-text,
+.subscribe-form form label,
+.move-up .bx-controls.bx-has-pager,
+.woocommerce .cart-collaterals .cross-sells,
+.woocommerce-page .cart-collaterals .cross-sells,
+.cart-collaterals h2,
+.related-product .bx-controls,
+.woocommerce div.product div.summary a.compare.button,
+ul.products li.product .icons a.added_to_cart.wc-forward,
+.view-list ul.products li.product figure .icons {
+    display: none;
+}
+
+.history-block .history-left .wpb_text_column {
+    position: absolute;
+    width: 160%;
+}
+
+.history-block .wpb_single_image {
+    float: right;
+}
+
+.promo-parallax .content {
+    padding-top: 110px;
+    position: absolute;
+    left: -10%;
+    width: 110%;
+}
+
+.promo-parallax h4 {
+    margin-bottom: 5px;
+}
+
+.promo-parallax h2 {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+.side-pad,
+.stylista-iconbox.box {
+    padding-left: 90px;
+    padding-right: 90px;
+}
+
+.contact-social {
+    text-align: center;
+}
+
+.woocommerce-message {
+    border-top-color: #86D270;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.view-grid ul.products li.product {
+    margin-bottom: 30px;
+    min-height: 470px;
+}
+
+
+/*-------------- quick view pop up -----------*/
+
+#yith-quick-view-modal .yith-wcqv-main {
+    box-shadow: none;
+}
+
+#yith-quick-view-modal.open .yith-wcqv-main {
+    overflow: initial;
+    padding: 30px;
+}
+
+#yith-quick-view-content div.images,
+#yith-quick-view-content div.summary {
+    margin: 0;
+    padding: 0;
+}
+
+#yith-quick-view-content div.summary {
+    padding-left: 30px;
+}
+
+.woocommerce #yith-quick-view-content div.product p.price,
+#yith-quick-view-content .item-desc.mb-20 {
+    margin-bottom: 25px;
+}
+
+.woocommerce ul.order_details {
+    margin-bottom: 80px;
+    border: 1px solid #ddd;
+    padding: 30px;
+}
+
+.woocommerce #yith-quick-view-content div.product form.cart {
+    margin-bottom: 10px;
+}
+
+.woocommerce ul.order_details li {
+    width: 23%;
+}
+
+.stylista-section.parallax,
+.hero-banner,
+.about-card-wrap{ 
+    margin-bottom: 50px;
+    position: relative; 
+    overflow: hidden;
+    padding-bottom: 0;
+}
+.hero-banner.v1{ 
+    margin-bottom: 0px;
+}
+ 
+.stylista-section.parallax .parallax-img{
+    background: 50% 50% no-repeat fixed;  
+    width: 100%; 
+    height: 100%;
+    position: absolute; 
+    object-fit: fill;
+}
+
+
+@media screen and ( min-width: 1800px){
+   .stylista-section.parallax .parallax-img{ background-size: 120%; }
+}
+ 
+.stylista-section.parallax.main-banner .parallax-img{
+    background-size: cover;
+}
+
+.stylista-section.parallax .parallax-img:before{
+    content: ""; 
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+.h3-dr {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: 2%;
+    margin-right: 3%;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.486);
+
+}
+
+
+
+
+
+
+//   .bossHeader {
+//     background-color: black;
+//     color: rgb(243, 243, 243);
+//     font-size: 1vw; 
+//     font-weight: bold;
+//     margin: 0 auto;
+//     padding: 0;
+//     width: 50%;
+//     text-align: center;
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     mix-blend-mode: multiply;
+//   }
+
+.glow {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+    padding: 5px;;
+  }
+  
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 5px #b1b1b1be, 0 0 7px #b1b1b1be, 0 0 10px #b1b1b1be, 0 0 10px #b1b1b1be, 0 0 15px #b1b1b1be, 0 0 15px #b1b1b1be, 0 0 10px #b1b1b1be;
+    }
+    
+    to {
+      text-shadow: 0 0 10px #5B247A, 0 0 20px #000000a9, 0 0 30px #5B247A, 0 0 40px #000000a9, 0 0 30px #000000a9, 0 0 20px #000000a9, 0 0 20px #5B247A;
+    }
+  }
+
+  .glow2 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 5px;
+  }

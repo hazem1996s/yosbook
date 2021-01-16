@@ -1,0 +1,147 @@
+<div class="container arabic" dir="rtl" style="margin-top: 5%;" >
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header card-header-danger text-right">
+                    <h4 class="card-title">تعديل البروفايل</h4>
+                    <p class="card-category">اكمل معلوماتك الشخصية</p>
+                </div>
+                <div class="card-body">
+                    <form novalidate [formGroup]="profileForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width arabic" style="cursor: not-allowed;">
+                                    <mat-label>البريد الإلكتروني</mat-label>
+                                    <input matInput [value]="user.email" type="email" disabled>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width arabic">
+                                    <mat-label>الاسم والكنية</mat-label>
+                                    <input formControlName="name" [(ngModel)]="user.name" matInput type="text" required>
+                                    <mat-error *ngIf="formErrors.name">
+                                        {{ formErrors.name }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width arabic">
+                                    <mat-label>رقم الهاتف</mat-label>
+                                    <input matInput formControlName="phone" [(ngModel)]="user.phone" placeholder="Örnk. 90 531 234 56 78" pattern="[0-9]*" type="tel" required>
+                                    <mat-error *ngIf="formErrors.phone">
+                                        {{ formErrors.phone }}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width arabic">
+                                    <mat-label>مكان الإقامة</mat-label>
+                                    <input matInput formControlName="address" [(ngModel)]="user.address" placeholder="Örnk. TÜRKİYE - İSTANBUL" type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width arabic">
+                                    <mat-label>الجنس</mat-label>
+                                    <mat-select class="arabic" formControlName="sex" [(ngModel)]="user.sex">
+                                        <mat-option class="arabic" value="male">ذكر</mat-option>
+                                        <mat-option class="arabic" value="female">انثى</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4" >
+                                <mat-form-field class="example-full-width">
+                                    <mat-label class="arabic">تاريخ الميلاد</mat-label>
+                                    <input matInput formControlName="dateBirth" [(ngModel)]="user.dateBirth" [matDatepicker]="picker" disabled>
+                                    <mat-datepicker-toggle dir="ltr" matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker dir="ltr" touchUi #picker disabled="false"></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width arabic">
+                                    <mat-label>المرحلة التعليمية</mat-label>
+                                    <mat-select class="arabic" formControlName="education" [(ngModel)]="user.education">
+                                        <mat-option class="arabic" value="bachelor">بكالوريوس</mat-option>
+                                        <mat-option class="arabic" value="master">ماجستير</mat-option>
+                                        <mat-option class="arabic" value="phd">دكتوراه</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="example-full-width arabic">
+                                    <mat-label>الجنسية</mat-label>
+                                    <input matInput formControlName="nationality" [(ngModel)]="user.nationality" placeholder="مثال: سوري - تركي" type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-md-4 center">
+                            <button mat-raised-button type="submit" [disabled]="profileForm.invalid" class="btn btn-danger btn-block arabic">تعديل البروفايل</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-avatar">
+                    <a *ngIf="user.image">
+                        <img class="img" src="{{user.image}}">
+                    </a>
+                    <a *ngIf="!user.image">
+                        <img class="img" src="{{downloadURL}}">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="container" *ngIf="file">
+                    <div class="row" *ngIf="percentage | async as pct">
+                        <div class="container">
+                            <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>
+                            <p style="margin-bottom: 0rem;">{{ pct | number }}% </p>
+                            <div class="ldBar label-center" style="width:50%;height:50%;margin:auto" data-value="35" data-preset="circle">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="snapshot | async as snap">
+                        <div *ngIf="downloadURL as url">
+                            <p class="text-center arabic" style="color: #00c851 !important">تم تحميل الصورة الشخصية بنجاح، قم بتعديل البروفايل لحفظ الصورة.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-7 center">
+                        <label for="file-upload" class="custom-file-upload arabic">
+                            تعديل الصورة <i class="fas fa-cloud-upload-alt"></i>
+                        </label>
+                        <input id="file-upload" (change)="onDrop($event.target.files)" type="file"/>
+                    </div>
+                    <h6 class="card-category text-gray">{{user.email}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" style="margin-bottom: 5%;margin-top: 3%;">
+        <h5 style="text-align: center;margin-bottom: 10px;">
+            الإمتحانات التي قمت بالدخول إاليها
+        </h5>
+        <table mdbTable hover="true" class="z-depth-1">
+            <thead>
+                <tr class="arabic">
+                    <th style="text-align: center;"><a>أسم الإمتحان </a></th>
+                    <th style="text-align: center;"><a>الدرجة  </a></th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let exam of exams ">
+                    <th style="text-align: center;" scope="row">{{exam.payload.doc.data().examName}}</th>
+                    <td class="arabic" style="text-align: center;">{{exam.payload.doc.data().result}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+<div class="container arabic mt-4">
+    <div class="card card-header col-md-12 center">
+        <div class="row" dir="rtl">
+            <div class="col-md-3 center">
+                <img class="center" src="{{yos.logo}}" width="100%" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="card card-body arabic" dir="rtl" style="text-align: right;">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="h6-responsive">
+                   <span style="font-weight: 900; "> اسم الجامعة</span> :  <span style="margin-right: 5px;">{{yos.name}} - {{yos.nameTR}}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; "> المدينة</span> :  <span style="margin-right: 5px;">{{yos.city}}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; "> ترتيب الجامعة محليا </span> :  <span style="margin-right: 5px;">{{yos.rankingTR}}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; "> ترتيب الجامعة عالميا </span> :  <span style="margin-right: 5px;">{{yos.rankingIN}}</span>
+                </h6>
+            </div>
+            <div class="col-md-6">
+                <h4 class="responsive" style="text-align: right;">
+                    معلومات هامة : 
+                </h4>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; ">  عدد أسئلة الامتحان </span> :  <span style="margin-right: 5px;">{{yos.questionNumber }}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; ">  مدة الامتحان بالدقيقة</span> :  <span style="margin-right: 5px;">{{yos.examDuration }}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; "> لغات الامتحان</span> :  <span style="margin-right: 5px;">{{yos.examLanguages }}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; "> اجور الامتحان</span> :  <span style="margin-right: 5px;">{{yos.examPrice }}</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; "> الجامعات التي تقبل هذا الامتحان</span> :  <span style="margin-right: 5px;">{{yos.universities }}</span>
+                </h6>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="responsive" style="text-align: right;">
+                    تواريخ هامة : 
+                </h4>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; ">  تاريخ بدء التسجيل </span> : 
+                    <span *ngIf="yos.startDate != null" style="margin-right: 5px;">{{yos.startDate | date: 'dd/MM/yyyy' }}</span>
+                    <span *ngIf="yos.startDate == null" style="margin-right: 5px;">غير متوفر</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; ">    تاريخ انتهاء التسجيل </span> : 
+                    <span *ngIf="yos.endDate != null" style="margin-right: 5px;">{{yos.endDate | date: 'dd/MM/yyyy'}}</span>
+                    <span *ngIf="yos.endDate == null" style="margin-right: 5px;">غير متوفر</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; ">  تاريخ الامتحان مع الساعة  </span> : 
+                    <span [hidden]="yos.examDate_time == '.' || yos.examDate_time == ',' || yos.examDate_time == '***' " style="margin-right: 5px;">{{yos.examDate_time }}</span>
+                    <span *ngIf="yos.examDate_time == '.' || yos.examDate_time == ',' || yos.examDate_time == '***' " style="margin-right: 5px;">غير متوفر</span>
+                </h6>
+                <h6 class="h6-responsive">
+                    <span style="font-weight: 900; ">   تاريخ ظهور النتائج  </span> : 
+                    <span *ngIf="yos.resultDate != null" style="margin-right: 5px;">{{yos.resultDate | date: 'dd/MM/yyyy'}}</span>
+                    <span *ngIf="yos.resultDate == null" style="margin-right: 5px;">غير متوفر</span>
+                </h6>
+            </div>
+            <div class="col-md-6">
+                <h6 class="h6-responsive" style="font-weight: 900;">
+                    معلومات وأهم الروابط  : 
+                </h6>
+                
+                <h4 class="h6-responsive">
+                    <span style="font-weight: 500;">رابط التسجيل</span> :
+                    <span [hidden]="yos.registerLink == '.' || yos.registerLink == ','"><a href="{{yos.registerLink}}" target="_blank">إضغط هنا</a></span>
+                    <span *ngIf="yos.registerLink == '.' || yos.registerLink == ',' || yos.registerLink == '***'">لا يوجد رابط متوفر</span>
+                </h4>
+                
+                <h4 class="h6-responsive">
+                    <span style="font-weight: 500;">المقاعد المتاحة</span> :
+                    <span [hidden]="yos.registerLink == '.' || yos.registerLink == ','"><a href="{{yos.seatsAvai}}" target="_blank">إضغط هنا</a></span>
+                    <span *ngIf="yos.registerLink == '.' || yos.registerLink == ',' || yos.registerLink == '***'">لا يوجد رابط متوفر</span>
+                </h4>
+                
+                <h4 class="h6-responsive">
+                    <span style="font-weight: 500;">رابط آخر</span> :
+                    <span [hidden]="yos.registerLink == '.' || yos.registerLink == ','"><a href="{{yos.otherLink}}" target="_blank">إضغط هنا</a></span>
+                    <span *ngIf="yos.registerLink == '.' || yos.registerLink == ',' || yos.registerLink == '***'">لا يوجد رابط متوفر</span>
+                </h4>
+            </div>
+        </div>
+        <hr>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class=" h6-responsive">
+                        مراكز الإمتحان
+                    </h4>
+                
+                <h6 class=" h6-responsive">
+                    <span [innerHTML]="yos.examCenters"></span>
+                </h6>
+            </div>
+                <hr>
+                    <div class="col-md-6">
+                        <h4 class=" h6-responsive">
+                            طريقة التسجيل
+                        </h4>
+                    
+                    <h6 class=" h6-responsive">
+                        <span [innerHTML]="yos.resgisterWay"></span>
+                    </h6>
+                </div>
+                    <hr>
+                    <div class="col-md-6">
+                        <h4 class=" h6-responsive">
+                            معلومات وطريقة الدفع
+                        </h4>
+                    
+                    <h6 class=" h6-responsive">
+                        <span [innerHTML]="yos.paymentInfo"></span>
+                    </h6>
+                    </div>
+                    <hr>
+                    <div class="col-md-6">
+                        <h4 class=" h6-responsive">
+                            ملاحظات هامة
+                        </h4>
+                  
+                    <h6 class=" h6-responsive">
+                        <span [innerHTML]="yos.notes"></span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container" style="margin-top:2%; margin-bottom: 5%;" dir="rtl">
+    <h2 class="text-center arabic" style="margin-bottom:5%"> - الامتحانات الشاملة لقسم {{quizTypeAR}} - </h2>
+    <div class="col-md-6 arabic">
+        <mat-form-field class="example-full-width arabic" appearance="outline" style="width: 100%;">
+            <mat-label>ابحث هنا <i class="fas fa-search prefix"></i> </mat-label>
+            <input placeholder="ابحث باسم الامتحان..." matInput [(ngModel)]="searchText" type="search">
+        </mat-form-field>
+    </div>
+    <div class="col-md-12">
+        <table mdbTable hover="true" class="z-depth-1">
+            <thead>
+                <tr class="arabic">
+                    <th style="text-align: center;"><a>رقم التسلسل </a></th>
+                    <th style="text-align: center;"><a>اسم الامتحان </a></th>
+                    <th style="text-align: center;"><a>مدة الامتحان </a></th>
+                    <th style="text-align: center;"><a>عدد الاسئلة  </a></th>
+                    <th style="text-align: center;">( بدء الامتحان )</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!spinner">
+                <tr *ngFor="let exam of sortData | filter:searchText; let i = index">
+                    <th style="text-align: center;" scope="row">{{i+1}}</th>
+                    <td class="arabic" style="text-align: center;">{{exam.name}}</td>
+                    <td class="arabic" style="text-align: center;">{{exam.time / 60 | number:'1.1-1'}} دقيقة</td>
+                    <td class="arabic" style="text-align: center;">{{exam.questions.length}}</td>
+                    <td style="text-align: center;">
+                        <a (click)="startModal.show()" style="margin-left: 5px;margin-right: 5px;" placement="bottom" mdbTooltip="ابدأ الإمتحان" class="btn btn-primary"><i style="color: rgb(255, 255, 255)" class="far fa-hand-point-up"></i></a>
+                    </td>
+                    <div mdbModal #startModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header arabic">
+                                    <p style="width: 100%; font-weight: 900;" class="text-center">
+                                        - {{exam.name}} - 
+                                    </p>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-right arabic">
+                                        هل تريد بدء الإمتحان بالفعل ؟ 
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="col-md-6 center">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a [routerLink]="['/', quizLink, exam.id]" class="btn btn-primary btn-block relative waves-light arabic" style="color: #fff;" (click)="startModal.hide()" mdbWavesEffect>نعم</a>
+                                            </div>
+                                            <div class="col-md-6"> 
+                                                <button class="btn btn-danger btn-block waves-light arabic" aria-label="Close" style="color: #fff;" (click)="startModal.hide()" mdbWavesEffect>إلغاء</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        <mat-spinner style="margin-top: 15px;" class="center" *ngIf="spinner"></mat-spinner>
+    </div>
+</div>

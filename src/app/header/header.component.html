@@ -1,0 +1,76 @@
+<mdb-navbar dir="rtl" SideClass="navbar navbar-expand-lg navbar-light blue-grey lighten-5 " [containerInside]="false">
+    <mdb-navbar-brand><span><img src="assets/logo.png" height="70"></span></mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light arabic" routerLink="/home"  style="font-size: 15px; " mdbWavesEffect>الصفحة الرئيسية<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light arabic" routerLink="/public-un"  style="font-size: 15px; " mdbWavesEffect>الجامعات الحكومية</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light arabic" routerLink="/privet-un"  style="font-size: 15px; " mdbWavesEffect>الجامعات الخاصة</a>
+            </li>
+            <li class="nav-item dropdown" dropdown routerLinkActive="active">
+                <a dropdownToggle mdbWavesEffect type="button"  class="nav-link dropdown-toggle waves-light arabic " style="font-size: 16px; " mdbWavesEffect>
+                    اليوس-YÖS<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown" role="menu">
+                    <a class="dropdown-item waves-light arabic blackC" routerLink="/yos" style="font-size: 18px;text-align: right;" mdbWavesEffect href="#">  ما هو امتحان اليوس ؟ </a>
+                    <a class="dropdown-item waves-light arabic blackC" routerLink="/yos-universities" style="font-size: 18px;text-align: right;" mdbWavesEffect href="#"> الجامعات التي تقدم امتحان اليوس </a>
+                </div>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a  class="nav-link waves-light arabic " routerLink="/sat" style="font-size: 16px;" mdbWavesEffect>السات-SAT</a>
+            </li>
+            <li class="nav-item dropdown" dropdown routerLinkActive="active">
+                <a dropdownToggle mdbWavesEffect type="button" mat-menu-item [matMenuTriggerFor]="exams" style="text-align: left;" class="nav-link dropdown-toggle waves-light arabic" mdbWavesEffect>الإمتحانات التجريبية</a>
+                <mat-menu #exams="matMenu">
+                    <a mat-menu-item [matMenuTriggerFor]="innvertebrates" class="arabic">المذاكراة الجزئية</a>
+                    <a mat-menu-item [matMenuTriggerFor]="invertebrates" class="arabic">الإمتحانات الشاملة</a>
+                </mat-menu>
+    
+                <mat-menu #innvertebrates="matMenu">
+                    <a routerLink="/partMath" mat-menu-item class="arabic">الرياضيات</a>
+                    <a routerLink="/partIQ" mat-menu-item class="arabic"> (IQ) اسئلة ذكاء </a>
+                    <a routerLink="/partGeometry" mat-menu-item class="arabic">هندسة</a>
+                    <a routerLink="/partProblem" mat-menu-item class="arabic">(problems) مشاكل</a>
+                </mat-menu>
+
+
+                <mat-menu #invertebrates="matMenu">
+                    <a routerLink="/allMathExams" mat-menu-item class="arabic">الرياضيات</a>
+                    <a routerLink="/allIQExams" mat-menu-item class="arabic">(IQ) اسئلة ذكاء</a>
+                    <a routerLink="/allGeometryExams" mat-menu-item class="arabic">هندسة</a>
+                    <a routerLink="/allProblemExams" mat-menu-item class="arabic">(problems) مشاكل</a>
+                    <a routerLink="/allPartsExams" mat-menu-item class="arabic">جميع الاقسام</a>
+                </mat-menu>
+            </li>
+        </ul>
+       
+        <ul class="navbar-nav mr-auto nav-flex-icons" *ngIf="authServices.userData as user">
+            <li class="nav-item avatar dropdown" style="margin-left: 20px;" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button"  class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                    <img *ngIf="!user.image" src="assets/male-user.png" alt="" class="img-fluid rounded-circle z-depth-0">
+                    <img *ngIf="user.image" src="{{user.image}}" alt="" class="img-fluid rounded-circle z-depth-0">
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light text-center arabic" style="font-weight: 400;" mdbWavesEffect routerLink="/profile">صفحة البروفايل</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a class="dropdown-item waves-light text-center arabic" (click)="signOut()" mdbWavesEffect> 
+                        <mdb-icon fas icon="sign-out-alt" size="sm"></mdb-icon>
+                        تسجيل خروج 
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto nav-flex-icons" *ngIf="!authServices.userData as user">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light arabic" routerLink="/sign-in" style="font-size: 16px;" mdbWavesEffect>
+                    تسجيل الدخول
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </links> 
+</mdb-navbar>
+
